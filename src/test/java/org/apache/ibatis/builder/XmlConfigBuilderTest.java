@@ -1,17 +1,17 @@
 /**
- *    Copyright 2009-2020 the original author or authors.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Copyright 2009-2020 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.apache.ibatis.builder;
 
@@ -142,13 +142,13 @@ class XmlConfigBuilderTest {
   @Test
   void registerJavaTypeInitializingTypeHandler() {
     final String MAPPER_CONFIG = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n"
-        + "<!DOCTYPE configuration PUBLIC \"-//mybatis.org//DTD Config 3.0//EN\" \"http://mybatis.org/dtd/mybatis-3-config.dtd\">\n"
-        + "<configuration>\n"
-        + "  <typeHandlers>\n"
-        + "    <typeHandler javaType=\"org.apache.ibatis.builder.XmlConfigBuilderTest$MyEnum\"\n"
-        + "      handler=\"org.apache.ibatis.builder.XmlConfigBuilderTest$EnumOrderTypeHandler\"/>\n"
-        + "  </typeHandlers>\n"
-        + "</configuration>\n";
+      + "<!DOCTYPE configuration PUBLIC \"-//mybatis.org//DTD Config 3.0//EN\" \"http://mybatis.org/dtd/mybatis-3-config.dtd\">\n"
+      + "<configuration>\n"
+      + "  <typeHandlers>\n"
+      + "    <typeHandler javaType=\"org.apache.ibatis.builder.XmlConfigBuilderTest$MyEnum\"\n"
+      + "      handler=\"org.apache.ibatis.builder.XmlConfigBuilderTest$EnumOrderTypeHandler\"/>\n"
+      + "  </typeHandlers>\n"
+      + "</configuration>\n";
 
     XMLConfigBuilder builder = new XMLConfigBuilder(new StringReader(MAPPER_CONFIG));
     builder.parse();
@@ -252,19 +252,19 @@ class XmlConfigBuilderTest {
 
       when(builder::parse);
       then(caughtException()).isInstanceOf(BuilderException.class)
-              .hasMessage("Each XMLConfigBuilder can only be used once.");
+        .hasMessage("Each XMLConfigBuilder can only be used once.");
     }
   }
 
   @Test
   void unknownSettings() {
     final String MAPPER_CONFIG = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n"
-            + "<!DOCTYPE configuration PUBLIC \"-//mybatis.org//DTD Config 3.0//EN\" \"http://mybatis.org/dtd/mybatis-3-config.dtd\">\n"
-            + "<configuration>\n"
-            + "  <settings>\n"
-            + "    <setting name=\"foo\" value=\"bar\"/>\n"
-            + "  </settings>\n"
-            + "</configuration>\n";
+      + "<!DOCTYPE configuration PUBLIC \"-//mybatis.org//DTD Config 3.0//EN\" \"http://mybatis.org/dtd/mybatis-3-config.dtd\">\n"
+      + "<configuration>\n"
+      + "  <settings>\n"
+      + "    <setting name=\"foo\" value=\"bar\"/>\n"
+      + "  </settings>\n"
+      + "</configuration>\n";
 
     XMLConfigBuilder builder = new XMLConfigBuilder(new StringReader(MAPPER_CONFIG));
     when(builder::parse);
@@ -275,12 +275,12 @@ class XmlConfigBuilderTest {
   @Test
   void unknownJavaTypeOnTypeHandler() {
     final String MAPPER_CONFIG = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n"
-            + "<!DOCTYPE configuration PUBLIC \"-//mybatis.org//DTD Config 3.0//EN\" \"http://mybatis.org/dtd/mybatis-3-config.dtd\">\n"
-            + "<configuration>\n"
-            + "  <typeAliases>\n"
-            + "    <typeAlias type=\"a.b.c.Foo\"/>\n"
-            + "  </typeAliases>\n"
-            + "</configuration>\n";
+      + "<!DOCTYPE configuration PUBLIC \"-//mybatis.org//DTD Config 3.0//EN\" \"http://mybatis.org/dtd/mybatis-3-config.dtd\">\n"
+      + "<configuration>\n"
+      + "  <typeAliases>\n"
+      + "    <typeAlias type=\"a.b.c.Foo\"/>\n"
+      + "  </typeAliases>\n"
+      + "</configuration>\n";
 
     XMLConfigBuilder builder = new XMLConfigBuilder(new StringReader(MAPPER_CONFIG));
     when(builder::parse);
@@ -291,10 +291,10 @@ class XmlConfigBuilderTest {
   @Test
   void propertiesSpecifyResourceAndUrlAtSameTime() {
     final String MAPPER_CONFIG = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n"
-            + "<!DOCTYPE configuration PUBLIC \"-//mybatis.org//DTD Config 3.0//EN\" \"http://mybatis.org/dtd/mybatis-3-config.dtd\">\n"
-            + "<configuration>\n"
-            + "  <properties resource=\"a/b/c/foo.properties\" url=\"file:./a/b/c/jdbc.properties\"/>\n"
-            + "</configuration>\n";
+      + "<!DOCTYPE configuration PUBLIC \"-//mybatis.org//DTD Config 3.0//EN\" \"http://mybatis.org/dtd/mybatis-3-config.dtd\">\n"
+      + "<configuration>\n"
+      + "  <properties resource=\"a/b/c/foo.properties\" url=\"file:./a/b/c/jdbc.properties\"/>\n"
+      + "</configuration>\n";
 
     XMLConfigBuilder builder = new XMLConfigBuilder(new StringReader(MAPPER_CONFIG));
     when(builder::parse);

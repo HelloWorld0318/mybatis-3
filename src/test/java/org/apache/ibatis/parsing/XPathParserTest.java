@@ -1,17 +1,17 @@
 /**
- *    Copyright 2009-2020 the original author or authors.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Copyright 2009-2020 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.apache.ibatis.parsing;
 
@@ -203,36 +203,36 @@ class XPathParserTest {
 
     String usersNodeToStringExpect =
       "<users>\n" +
-      "    <user>\n" +
-      "        <id>100</id>\n" +
-      "        <name>Tom</name>\n" +
-      "        <age>30</age>\n" +
-      "        <cars>\n" +
-      "            <car>BMW</car>\n" +
-      "            <car>Audi</car>\n" +
-      "            <car>Benz</car>\n" +
-      "        </cars>\n" +
-      "    </user>\n" +
-      "</users>\n";
+        "    <user>\n" +
+        "        <id>100</id>\n" +
+        "        <name>Tom</name>\n" +
+        "        <age>30</age>\n" +
+        "        <cars>\n" +
+        "            <car>BMW</car>\n" +
+        "            <car>Audi</car>\n" +
+        "            <car>Benz</car>\n" +
+        "        </cars>\n" +
+        "    </user>\n" +
+        "</users>\n";
 
     String userNodeToStringExpect =
       "<user>\n" +
-      "    <id>100</id>\n" +
-      "    <name>Tom</name>\n" +
-      "    <age>30</age>\n" +
-      "    <cars>\n" +
-      "        <car>BMW</car>\n" +
-      "        <car>Audi</car>\n" +
-      "        <car>Benz</car>\n" +
-      "    </cars>\n" +
-      "</user>\n";
+        "    <id>100</id>\n" +
+        "    <name>Tom</name>\n" +
+        "    <age>30</age>\n" +
+        "    <cars>\n" +
+        "        <car>BMW</car>\n" +
+        "        <car>Audi</car>\n" +
+        "        <car>Benz</car>\n" +
+        "    </cars>\n" +
+        "</user>\n";
 
-  String carsNodeToStringExpect =
+    String carsNodeToStringExpect =
       "<cars>\n" +
-      "    <car>BMW</car>\n" +
-      "    <car>Audi</car>\n" +
-      "    <car>Benz</car>\n" +
-      "</cars>\n";
+        "    <car>BMW</car>\n" +
+        "    <car>Audi</car>\n" +
+        "    <car>Benz</car>\n" +
+        "</cars>\n";
 
     assertEquals(usersNodeToStringExpect, usersNodeToString);
     assertEquals(userNodeToStringExpect, userNodeToString);

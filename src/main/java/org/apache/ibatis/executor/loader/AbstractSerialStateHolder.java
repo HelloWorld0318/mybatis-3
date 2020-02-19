@@ -1,17 +1,17 @@
 /**
- *    Copyright 2009-2019 the original author or authors.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Copyright 2009-2019 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.apache.ibatis.executor.loader;
 
@@ -54,11 +54,11 @@ public abstract class AbstractSerialStateHolder implements Externalizable {
   }
 
   public AbstractSerialStateHolder(
-          final Object userBean,
-          final Map<String, ResultLoaderMap.LoadPair> unloadedProperties,
-          final ObjectFactory objectFactory,
-          List<Class<?>> constructorArgTypes,
-          List<Object> constructorArgs) {
+    final Object userBean,
+    final Map<String, ResultLoaderMap.LoadPair> unloadedProperties,
+    final ObjectFactory objectFactory,
+    List<Class<?>> constructorArgTypes,
+    List<Object> constructorArgs) {
     this.userBean = userBean;
     this.unloadedProperties = new HashMap<>(unloadedProperties);
     this.objectFactory = objectFactory;
@@ -129,20 +129,20 @@ public abstract class AbstractSerialStateHolder implements Externalizable {
   }
 
   protected abstract Object createDeserializationProxy(Object target, Map<String, ResultLoaderMap.LoadPair> unloadedProperties, ObjectFactory objectFactory,
-          List<Class<?>> constructorArgTypes, List<Object> constructorArgs);
+                                                       List<Class<?>> constructorArgTypes, List<Object> constructorArgs);
 
   private static class LookAheadObjectInputStream extends ObjectInputStream {
     private static final List<String> blacklist = Arrays.asList(
-        "org.apache.commons.beanutils.BeanComparator",
-        "org.apache.commons.collections.functors.InvokerTransformer",
-        "org.apache.commons.collections.functors.InstantiateTransformer",
-        "org.apache.commons.collections4.functors.InvokerTransformer",
-        "org.apache.commons.collections4.functors.InstantiateTransformer",
-        "org.codehaus.groovy.runtime.ConvertedClosure",
-        "org.codehaus.groovy.runtime.MethodClosure",
-        "org.springframework.beans.factory.ObjectFactory",
-        "org.springframework.transaction.jta.JtaTransactionManager",
-        "com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl");
+      "org.apache.commons.beanutils.BeanComparator",
+      "org.apache.commons.collections.functors.InvokerTransformer",
+      "org.apache.commons.collections.functors.InstantiateTransformer",
+      "org.apache.commons.collections4.functors.InvokerTransformer",
+      "org.apache.commons.collections4.functors.InstantiateTransformer",
+      "org.codehaus.groovy.runtime.ConvertedClosure",
+      "org.codehaus.groovy.runtime.MethodClosure",
+      "org.springframework.beans.factory.ObjectFactory",
+      "org.springframework.transaction.jta.JtaTransactionManager",
+      "com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl");
 
     public LookAheadObjectInputStream(InputStream in) throws IOException {
       super(in);
@@ -153,8 +153,8 @@ public abstract class AbstractSerialStateHolder implements Externalizable {
       String className = desc.getName();
       if (blacklist.contains(className)) {
         throw new InvalidClassException(className, "Deserialization is not allowed for security reasons. "
-            + "It is strongly recommended to configure the deserialization filter provided by JDK. "
-            + "See http://openjdk.java.net/jeps/290 for the details.");
+          + "It is strongly recommended to configure the deserialization filter provided by JDK. "
+          + "See http://openjdk.java.net/jeps/290 for the details.");
       }
       return super.resolveClass(desc);
     }

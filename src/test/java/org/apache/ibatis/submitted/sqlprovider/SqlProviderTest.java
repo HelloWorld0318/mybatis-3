@@ -1,17 +1,17 @@
 /**
- *    Copyright 2009-2019 the original author or authors.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Copyright 2009-2019 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.apache.ibatis.submitted.sqlprovider;
 
@@ -54,18 +54,18 @@ class SqlProviderTest {
   static void setUp() throws Exception {
     // create a SqlSessionFactory
     try (Reader reader = Resources
-        .getResourceAsReader("org/apache/ibatis/submitted/sqlprovider/mybatis-config.xml")) {
+      .getResourceAsReader("org/apache/ibatis/submitted/sqlprovider/mybatis-config.xml")) {
       sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
       sqlSessionFactory.getConfiguration().addMapper(StaticMethodSqlProviderMapper.class);
       sqlSessionFactory.getConfiguration().addMapper(DatabaseIdMapper.class);
     }
     // populate in-memory database
     BaseDataTest.runScript(sqlSessionFactory.getConfiguration().getEnvironment().getDataSource(),
-            "org/apache/ibatis/submitted/sqlprovider/CreateDB.sql");
+      "org/apache/ibatis/submitted/sqlprovider/CreateDB.sql");
 
     // create a SqlSessionFactory
     try (Reader reader = Resources
-        .getResourceAsReader("org/apache/ibatis/submitted/sqlprovider/mybatis-config.xml")) {
+      .getResourceAsReader("org/apache/ibatis/submitted/sqlprovider/mybatis-config.xml")) {
       sqlSessionFactoryForDerby = new SqlSessionFactoryBuilder().build(reader, "development-derby");
       sqlSessionFactoryForDerby.getConfiguration().addMapper(DatabaseIdMapper.class);
     }
@@ -277,7 +277,7 @@ class SqlProviderTest {
       Class<?> mapperType = ErrorMapper.class;
       Method mapperMethod = mapperType.getMethod("methodNotFound");
       new ProviderSqlSource(new Configuration(),
-            mapperMethod.getAnnotation(SelectProvider.class), mapperType, mapperMethod);
+        mapperMethod.getAnnotation(SelectProvider.class), mapperType, mapperMethod);
       fail();
     } catch (BuilderException e) {
       assertTrue(e.getMessage().contains("Error creating SqlSource for SqlProvider. Method 'methodNotFound' not found in SqlProvider 'org.apache.ibatis.submitted.sqlprovider.SqlProviderTest$ErrorSqlBuilder'."));
@@ -290,7 +290,7 @@ class SqlProviderTest {
       Class<?> mapperType = ErrorMapper.class;
       Method mapperMethod = mapperType.getMethod("methodOverload", String.class);
       new ProviderSqlSource(new Configuration(),
-              mapperMethod.getAnnotation(SelectProvider.class), mapperType, mapperMethod);
+        mapperMethod.getAnnotation(SelectProvider.class), mapperType, mapperMethod);
       fail();
     } catch (BuilderException e) {
       assertTrue(e.getMessage().contains("Error creating SqlSource for SqlProvider. Method 'overload' is found multiple in SqlProvider 'org.apache.ibatis.submitted.sqlprovider.SqlProviderTest$ErrorSqlBuilder'. Sql provider method can not overload."));
@@ -315,7 +315,7 @@ class SqlProviderTest {
       Class<?> mapperType = ErrorMapper.class;
       Method mapperMethod = mapperType.getMethod("omitType");
       new ProviderSqlSource(new Configuration(),
-          mapperMethod.getAnnotation(SelectProvider.class), mapperType, mapperMethod);
+        mapperMethod.getAnnotation(SelectProvider.class), mapperType, mapperMethod);
       fail();
     } catch (BuilderException e) {
       assertTrue(e.getMessage().contains("Please specify either 'value' or 'type' attribute of @SelectProvider at the 'public abstract void org.apache.ibatis.submitted.sqlprovider.SqlProviderTest$ErrorMapper.omitType()'."));
@@ -328,7 +328,7 @@ class SqlProviderTest {
       Class<?> mapperType = ErrorMapper.class;
       Method mapperMethod = mapperType.getMethod("differentTypeAndValue");
       new ProviderSqlSource(new Configuration(),
-          mapperMethod.getAnnotation(DeleteProvider.class), mapperType, mapperMethod);
+        mapperMethod.getAnnotation(DeleteProvider.class), mapperType, mapperMethod);
       fail();
     } catch (BuilderException e) {
       assertTrue(e.getMessage().contains("Cannot specify different class on 'value' and 'type' attribute of @DeleteProvider at the 'public abstract void org.apache.ibatis.submitted.sqlprovider.SqlProviderTest$ErrorMapper.differentTypeAndValue()'."));
@@ -341,7 +341,7 @@ class SqlProviderTest {
       Class<?> mapperType = ErrorMapper.class;
       Method mapperMethod = mapperType.getMethod("multipleProviderContext");
       new ProviderSqlSource(new Configuration(),
-            mapperMethod.getAnnotation(SelectProvider.class), mapperType, mapperMethod);
+        mapperMethod.getAnnotation(SelectProvider.class), mapperType, mapperMethod);
       fail();
     } catch (BuilderException e) {
       assertTrue(e.getMessage().contains("Error creating SqlSource for SqlProvider. ProviderContext found multiple in SqlProvider method (org.apache.ibatis.submitted.sqlprovider.SqlProviderTest$ErrorSqlBuilder.multipleProviderContext). ProviderContext can not define multiple in SqlProvider method argument."));
@@ -354,8 +354,8 @@ class SqlProviderTest {
       Class<?> mapperType = Mapper.class;
       Method mapperMethod = mapperType.getMethod("getUsersByName", String.class, String.class);
       new ProviderSqlSource(new Configuration(),
-            mapperMethod.getAnnotation(SelectProvider.class), mapperType, mapperMethod)
-              .getBoundSql(new Object());
+        mapperMethod.getAnnotation(SelectProvider.class), mapperType, mapperMethod)
+        .getBoundSql(new Object());
       fail();
     } catch (BuilderException e) {
       assertTrue(e.getMessage().contains("Error invoking SqlProvider method 'public java.lang.String org.apache.ibatis.submitted.sqlprovider.OurSqlBuilder.buildGetUsersByNameQuery(java.lang.String,java.lang.String)' with specify parameter 'class java.lang.Object'.  Cause: java.lang.IllegalArgumentException: wrong number of arguments"));
@@ -368,8 +368,8 @@ class SqlProviderTest {
       Class<?> mapperType = Mapper.class;
       Method mapperMethod = mapperType.getMethod("getUsersByNameWithParamName", String.class);
       new ProviderSqlSource(new Configuration(),
-            mapperMethod.getAnnotation(SelectProvider.class), mapperType, mapperMethod)
-              .getBoundSql(new Object());
+        mapperMethod.getAnnotation(SelectProvider.class), mapperType, mapperMethod)
+        .getBoundSql(new Object());
       fail();
     } catch (BuilderException e) {
       assertTrue(e.getMessage().contains("Error invoking SqlProvider method 'public java.lang.String org.apache.ibatis.submitted.sqlprovider.OurSqlBuilder.buildGetUsersByNameWithParamNameQuery(java.lang.String)' with specify parameter 'class java.lang.Object'.  Cause: java.lang.IllegalArgumentException: argument type mismatch"));
@@ -382,8 +382,8 @@ class SqlProviderTest {
       Class<?> mapperType = ErrorMapper.class;
       Method mapperMethod = mapperType.getMethod("invokeError");
       new ProviderSqlSource(new Configuration(),
-            mapperMethod.getAnnotation(SelectProvider.class), mapperType, mapperMethod)
-              .getBoundSql(new Object());
+        mapperMethod.getAnnotation(SelectProvider.class), mapperType, mapperMethod)
+        .getBoundSql(new Object());
       fail();
     } catch (BuilderException e) {
       assertTrue(e.getMessage().contains("Error invoking SqlProvider method 'public java.lang.String org.apache.ibatis.submitted.sqlprovider.SqlProviderTest$ErrorSqlBuilder.invokeError()' with specify parameter 'class java.lang.Object'.  Cause: java.lang.UnsupportedOperationException: invokeError"));
@@ -488,8 +488,8 @@ class SqlProviderTest {
   void mapperMultipleParamAndProviderContextWithAtParam() {
     try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       Mapper mapper = sqlSession.getMapper(Mapper.class);
-      assertEquals(1, mapper.selectByIdAndNameWithAtParam(4,"User4").size());
-      assertEquals(0, mapper.selectActiveByIdAndNameWithAtParam(4,"User4").size());
+      assertEquals(1, mapper.selectByIdAndNameWithAtParam(4, "User4").size());
+      assertEquals(0, mapper.selectActiveByIdAndNameWithAtParam(4, "User4").size());
     }
   }
 
@@ -497,8 +497,8 @@ class SqlProviderTest {
   void mapperMultipleParamAndProviderContext() {
     try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       Mapper mapper = sqlSession.getMapper(Mapper.class);
-      assertEquals(1, mapper.selectByIdAndName(4,"User4").size());
-      assertEquals(0, mapper.selectActiveByIdAndName(4,"User4").size());
+      assertEquals(1, mapper.selectByIdAndName(4, "User4").size());
+      assertEquals(0, mapper.selectActiveByIdAndName(4, "User4").size());
     }
   }
 
@@ -506,7 +506,7 @@ class SqlProviderTest {
   void staticMethodNoArgument() {
     try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       StaticMethodSqlProviderMapper mapper =
-          sqlSession.getMapper(StaticMethodSqlProviderMapper.class);
+        sqlSession.getMapper(StaticMethodSqlProviderMapper.class);
       assertEquals(1, mapper.noArgument());
     }
   }
@@ -515,7 +515,7 @@ class SqlProviderTest {
   void staticMethodOneArgument() {
     try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       StaticMethodSqlProviderMapper mapper =
-          sqlSession.getMapper(StaticMethodSqlProviderMapper.class);
+        sqlSession.getMapper(StaticMethodSqlProviderMapper.class);
       assertEquals(10, mapper.oneArgument(10));
     }
   }
@@ -614,7 +614,7 @@ class SqlProviderTest {
   void staticMethodMultipleArgument() {
     try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       StaticMethodSqlProviderMapper mapper =
-          sqlSession.getMapper(StaticMethodSqlProviderMapper.class);
+        sqlSession.getMapper(StaticMethodSqlProviderMapper.class);
       assertEquals(2, mapper.multipleArgument(1, 1));
     }
   }
@@ -623,7 +623,7 @@ class SqlProviderTest {
   void staticMethodOnlyProviderContext() {
     try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       StaticMethodSqlProviderMapper mapper =
-          sqlSession.getMapper(StaticMethodSqlProviderMapper.class);
+        sqlSession.getMapper(StaticMethodSqlProviderMapper.class);
       assertEquals("onlyProviderContext", mapper.onlyProviderContext());
     }
   }
@@ -632,7 +632,7 @@ class SqlProviderTest {
   void staticMethodOneArgumentAndProviderContext() {
     try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       StaticMethodSqlProviderMapper mapper =
-          sqlSession.getMapper(StaticMethodSqlProviderMapper.class);
+        sqlSession.getMapper(StaticMethodSqlProviderMapper.class);
       assertEquals("oneArgumentAndProviderContext 100", mapper.oneArgumentAndProviderContext(100));
     }
   }
@@ -669,7 +669,7 @@ class SqlProviderTest {
   void keepBackwardCompatibilityOnDeprecatedConstructorWithAnnotation() throws NoSuchMethodException {
     Class<?> mapperType = StaticMethodSqlProviderMapper.class;
     Method mapperMethod = mapperType.getMethod("noArgument");
-    ProviderSqlSource sqlSource = new ProviderSqlSource(new Configuration(), (Object)mapperMethod.getAnnotation(SelectProvider.class), mapperType, mapperMethod);
+    ProviderSqlSource sqlSource = new ProviderSqlSource(new Configuration(), (Object) mapperMethod.getAnnotation(SelectProvider.class), mapperType, mapperMethod);
     assertEquals("SELECT 1 FROM INFORMATION_SCHEMA.SYSTEM_USERS", sqlSource.getBoundSql(null).getSql());
   }
 
@@ -795,7 +795,7 @@ class SqlProviderTest {
 
       public static StringBuilder oneArgument(Integer value) {
         return new StringBuilder().append("SELECT ").append(value)
-            .append(" FROM INFORMATION_SCHEMA.SYSTEM_USERS");
+          .append(" FROM INFORMATION_SCHEMA.SYSTEM_USERS");
       }
 
       public static StringBuilder onePrimitiveByteArgument(byte value) {
@@ -849,18 +849,18 @@ class SqlProviderTest {
       }
 
       public static CharSequence multipleArgument(@Param("value1") Integer value1,
-          @Param("value2") Integer value2) {
+                                                  @Param("value2") Integer value2) {
         return "SELECT " + (value1 + value2) + " FROM INFORMATION_SCHEMA.SYSTEM_USERS";
       }
 
       public static CharSequence onlyProviderContext(ProviderContext context) {
         return new StringBuilder().append("SELECT '").append(context.getMapperMethod().getName())
-            .append("' FROM INFORMATION_SCHEMA.SYSTEM_USERS");
+          .append("' FROM INFORMATION_SCHEMA.SYSTEM_USERS");
       }
 
       public static String oneArgumentAndProviderContext(Integer value, ProviderContext context) {
         return "SELECT '" + context.getMapperMethod().getName() + " " + value
-            + "' FROM INFORMATION_SCHEMA.SYSTEM_USERS";
+          + "' FROM INFORMATION_SCHEMA.SYSTEM_USERS";
       }
 
       public static String mapAndProviderContext(Map<String, Object> map, ProviderContext context) {
@@ -929,11 +929,11 @@ class SqlProviderTest {
 
   @Test
   void shouldPassedDatabaseIdToProviderMethod() {
-    try (SqlSession sqlSession = sqlSessionFactory.openSession()){
+    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       DatabaseIdMapper mapper = sqlSession.getMapper(DatabaseIdMapper.class);
       assertEquals("hsql", mapper.selectDatabaseId());
     }
-    try (SqlSession sqlSession = sqlSessionFactoryForDerby.openSession()){
+    try (SqlSession sqlSession = sqlSessionFactoryForDerby.openSession()) {
       DatabaseIdMapper mapper = sqlSession.getMapper(DatabaseIdMapper.class);
       assertEquals("derby", mapper.selectDatabaseId());
     }

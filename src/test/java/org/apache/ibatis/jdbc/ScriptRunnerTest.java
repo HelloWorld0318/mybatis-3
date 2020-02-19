@@ -1,17 +1,17 @@
 /**
- *    Copyright 2009-2020 the original author or authors.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Copyright 2009-2020 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.apache.ibatis.jdbc;
 
@@ -78,10 +78,10 @@ class ScriptRunnerTest extends BaseDataTest {
   void shouldRunScriptsUsingProperties() throws Exception {
     Properties props = Resources.getResourceAsProperties(JPETSTORE_PROPERTIES);
     DataSource dataSource = new UnpooledDataSource(
-        props.getProperty("driver"),
-        props.getProperty("url"),
-        props.getProperty("username"),
-        props.getProperty("password"));
+      props.getProperty("driver"),
+      props.getProperty("url"),
+      props.getProperty("username"),
+      props.getProperty("password"));
     ScriptRunner runner = new ScriptRunner(dataSource.getConnection());
     runner.setAutoCommit(true);
     runner.setStopOnError(false);
@@ -181,9 +181,9 @@ class ScriptRunnerTest extends BaseDataTest {
       runner.runScript(reader);
 
       assertEquals(
-              "select userid from account where userid = 'j2ee'" + LINE_SEPARATOR
-                      + LINE_SEPARATOR + "USERID\t" + LINE_SEPARATOR
-                      + "j2ee\t" + LINE_SEPARATOR, sw.toString());
+        "select userid from account where userid = 'j2ee'" + LINE_SEPARATOR
+          + LINE_SEPARATOR + "USERID\t" + LINE_SEPARATOR
+          + "j2ee\t" + LINE_SEPARATOR, sw.toString());
     }
   }
 
@@ -204,9 +204,9 @@ class ScriptRunnerTest extends BaseDataTest {
       runner.runScript(reader);
 
       assertEquals(
-              "select userid from account where userid = 'j2ee';" + LINE_SEPARATOR
-                      + LINE_SEPARATOR + "USERID\t" + LINE_SEPARATOR
-                      + "j2ee\t" + LINE_SEPARATOR, sw.toString());
+        "select userid from account where userid = 'j2ee';" + LINE_SEPARATOR
+          + LINE_SEPARATOR + "USERID\t" + LINE_SEPARATOR
+          + "j2ee\t" + LINE_SEPARATOR, sw.toString());
     }
   }
 
@@ -235,15 +235,15 @@ class ScriptRunnerTest extends BaseDataTest {
     ScriptRunner runner = new ScriptRunner(conn);
 
     String sql = "-- @DELIMITER | \n"
-        + "line 1;\n"
-        + "line 2;\n"
-        + "|\n"
-        + "//  @DELIMITER  ;\n"
-        + "line 3; \n"
-        + "-- //@deLimiTer $  blah\n"
-        + "line 4$\n"
-        + "// //@DELIMITER %\n"
-        + "line 5%\n";
+      + "line 1;\n"
+      + "line 2;\n"
+      + "|\n"
+      + "//  @DELIMITER  ;\n"
+      + "line 3; \n"
+      + "-- //@deLimiTer $  blah\n"
+      + "line 4$\n"
+      + "// //@DELIMITER %\n"
+      + "line 5%\n";
     Reader reader = new StringReader(sql);
     runner.runScript(reader);
 
@@ -274,11 +274,11 @@ class ScriptRunnerTest extends BaseDataTest {
     ScriptRunner runner = new ScriptRunner(conn);
 
     String sql = "-- @DELIMITER || \n"
-        + "line 1;\n"
-        + "line 2;\n"
-        + "||\n"
-        + "//  @DELIMITER  ;\n"
-        + "line 3; \n";
+      + "line 1;\n"
+      + "line 2;\n"
+      + "||\n"
+      + "//  @DELIMITER  ;\n"
+      + "line 3; \n";
     Reader reader = new StringReader(sql);
     runner.runScript(reader);
 

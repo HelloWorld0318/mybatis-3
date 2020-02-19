@@ -1,17 +1,17 @@
 /**
- *    Copyright 2009-2019 the original author or authors.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Copyright 2009-2019 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.apache.ibatis.submitted.keygen;
 
@@ -54,7 +54,7 @@ class Jdbc3KeyGeneratorTest {
 
     // populate in-memory database
     BaseDataTest.runScript(sqlSessionFactory.getConfiguration().getEnvironment().getDataSource(),
-            "org/apache/ibatis/submitted/keygen/CreateDB.sql");
+      "org/apache/ibatis/submitted/keygen/CreateDB.sql");
   }
 
   @Test
@@ -288,9 +288,9 @@ class Jdbc3KeyGeneratorTest {
         Country country = new Country("China", "CN");
         when(() -> mapper.insertMultiParams_keyPropertyWithoutParamName(country, 1));
         then(caughtException()).isInstanceOf(PersistenceException.class).hasMessageContaining(
-            "Could not determine which parameter to assign generated keys to. "
-                + "Note that when there are multiple parameters, 'keyProperty' must include the parameter name (e.g. 'param.id'). "
-                + "Specified key properties are [id] and available parameters are [");
+          "Could not determine which parameter to assign generated keys to. "
+            + "Note that when there are multiple parameters, 'keyProperty' must include the parameter name (e.g. 'param.id'). "
+            + "Specified key properties are [id] and available parameters are [");
       } finally {
         sqlSession.rollback();
       }
@@ -305,9 +305,9 @@ class Jdbc3KeyGeneratorTest {
         Country country = new Country("China", "CN");
         when(() -> mapper.insertMultiParams_keyPropertyWithWrongParamName(country, 1));
         then(caughtException()).isInstanceOf(PersistenceException.class).hasMessageContaining(
-            "Could not find parameter 'bogus'. "
-                + "Note that when there are multiple parameters, 'keyProperty' must include the parameter name (e.g. 'param.id'). "
-                + "Specified key properties are [bogus.id] and available parameters are [");
+          "Could not find parameter 'bogus'. "
+            + "Note that when there are multiple parameters, 'keyProperty' must include the parameter name (e.g. 'param.id'). "
+            + "Specified key properties are [bogus.id] and available parameters are [");
       } finally {
         sqlSession.rollback();
       }
@@ -416,6 +416,7 @@ class Jdbc3KeyGeneratorTest {
       }
     }
   }
+
   @Test
   void shouldAssignMultipleGeneratedKeysToABean_MultiParams_batch() {
     try (SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH)) {
@@ -506,7 +507,7 @@ class Jdbc3KeyGeneratorTest {
 
         when(() -> mapper.insertUndefineKeyProperty(new Country("China", "CN")));
         then(caughtException()).isInstanceOf(PersistenceException.class).hasMessageContaining(
-                "### Error updating database.  Cause: org.apache.ibatis.executor.ExecutorException: Error getting generated key or setting result to parameter object. Cause: org.apache.ibatis.executor.ExecutorException: No setter found for the keyProperty 'country_id' in 'org.apache.ibatis.submitted.keygen.Country'.");
+          "### Error updating database.  Cause: org.apache.ibatis.executor.ExecutorException: Error getting generated key or setting result to parameter object. Cause: org.apache.ibatis.executor.ExecutorException: No setter found for the keyProperty 'country_id' in 'org.apache.ibatis.submitted.keygen.Country'.");
       } finally {
         sqlSession.rollback();
       }
@@ -520,7 +521,7 @@ class Jdbc3KeyGeneratorTest {
         CountryMapper mapper = sqlSession.getMapper(CountryMapper.class);
         when(() -> mapper.tooManyGeneratedKeys(new Country()));
         then(caughtException()).isInstanceOf(PersistenceException.class).hasMessageContaining(
-            "Too many keys are generated. There are only 1 target objects.");
+          "Too many keys are generated. There are only 1 target objects.");
       } finally {
         sqlSession.rollback();
       }
@@ -534,7 +535,7 @@ class Jdbc3KeyGeneratorTest {
         CountryMapper mapper = sqlSession.getMapper(CountryMapper.class);
         when(() -> mapper.tooManyGeneratedKeysParamMap(new Country(), 1));
         then(caughtException()).isInstanceOf(PersistenceException.class).hasMessageContaining(
-            "Too many keys are generated. There are only 1 target objects.");
+          "Too many keys are generated. There are only 1 target objects.");
       } finally {
         sqlSession.rollback();
       }
@@ -550,7 +551,7 @@ class Jdbc3KeyGeneratorTest {
         mapper.tooManyGeneratedKeysParamMap(new Country(), 1);
         when(sqlSession::flushStatements);
         then(caughtException()).isInstanceOf(PersistenceException.class).hasMessageContaining(
-            "Too many keys are generated. There are only 2 target objects.");
+          "Too many keys are generated. There are only 2 target objects.");
       } finally {
         sqlSession.rollback();
       }

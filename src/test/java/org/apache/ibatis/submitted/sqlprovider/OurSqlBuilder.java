@@ -1,17 +1,17 @@
 /**
- *    Copyright 2009-2020 the original author or authors.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Copyright 2009-2020 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.apache.ibatis.submitted.sqlprovider;
 
@@ -59,7 +59,7 @@ public class OurSqlBuilder {
   }
 
   public String buildGetUsersByCriteriaQuery(final User criteria) {
-    return new SQL(){{
+    return new SQL() {{
       SELECT("*");
       FROM("users");
       if (criteria.getId() != null) {
@@ -72,7 +72,7 @@ public class OurSqlBuilder {
   }
 
   public String buildGetUsersByCriteriaMapQuery(final Map<String, Object> criteria) {
-    return new SQL(){{
+    return new SQL() {{
       SELECT("*");
       FROM("users");
       if (criteria.get("id") != null) {
@@ -98,7 +98,7 @@ public class OurSqlBuilder {
   }
 
   public String buildGetUsersByNameQuery(final String name, final String orderByColumn) {
-    return new SQL(){{
+    return new SQL() {{
       SELECT("*");
       FROM("users");
       if (name != null) {
@@ -111,7 +111,7 @@ public class OurSqlBuilder {
   public String buildGetUsersByNameUsingMap(Map<String, Object> params) {
     final String name = String.class.cast(params.get("param1"));
     final String orderByColumn = String.class.cast(params.get("param2"));
-    return new SQL(){{
+    return new SQL() {{
       SELECT("*");
       FROM("users");
       if (name != null) {
@@ -122,7 +122,7 @@ public class OurSqlBuilder {
   }
 
   public String buildGetUsersByNameWithParamNameAndOrderByQuery(@Param("orderByColumn") final String orderByColumn, @Param("name") final String name) {
-    return new SQL(){{
+    return new SQL() {{
       SELECT("*");
       FROM("users");
       if (name != null) {
@@ -133,7 +133,7 @@ public class OurSqlBuilder {
   }
 
   public String buildGetUsersByNameWithParamNameQuery(@Param("name") final String name) {
-    return new SQL(){{
+    return new SQL() {{
       SELECT("*");
       FROM("users");
       if (name != null) {
@@ -146,7 +146,7 @@ public class OurSqlBuilder {
   public String buildGetUsersByNameWithParamNameQueryUsingMap(Map<String, Object> params) {
     final String name = String.class.cast(params.get("name"));
     final String orderByColumn = String.class.cast(params.get("orderByColumn"));
-    return new SQL(){{
+    return new SQL() {{
       SELECT("*");
       FROM("users");
       if (name != null) {
@@ -171,11 +171,11 @@ public class OurSqlBuilder {
   public String buildSelectByIdProviderContextOnly(ProviderContext context) {
     final boolean containsLogicalDelete = context.getMapperMethod().getAnnotation(BaseMapper.ContainsLogicalDelete.class) != null;
     final String tableName = context.getMapperType().getAnnotation(BaseMapper.Meta.class).tableName();
-    return new SQL(){{
+    return new SQL() {{
       SELECT("*");
       FROM(tableName);
       WHERE("id = #{id}");
-      if (!containsLogicalDelete){
+      if (!containsLogicalDelete) {
         WHERE("logical_delete = ${Constants.LOGICAL_DELETE_OFF}");
       }
     }}.toString();
@@ -184,13 +184,13 @@ public class OurSqlBuilder {
   public String buildSelectByNameOneParamAndProviderContext(ProviderContext context, final String name) {
     final boolean containsLogicalDelete = context.getMapperMethod().getAnnotation(BaseMapper.ContainsLogicalDelete.class) != null;
     final String tableName = context.getMapperType().getAnnotation(BaseMapper.Meta.class).tableName();
-    return new SQL(){{
+    return new SQL() {{
       SELECT("*");
       FROM(tableName);
       if (name != null) {
         WHERE("name like #{name} || '%'");
       }
-      if (!containsLogicalDelete){
+      if (!containsLogicalDelete) {
         WHERE("logical_delete = ${LOGICAL_DELETE_OFF:0}");
       }
     }}.toString();
@@ -199,7 +199,7 @@ public class OurSqlBuilder {
   public String buildSelectByIdAndNameMultipleParamAndProviderContextWithAtParam(@Param("id") final Integer id, ProviderContext context, @Param("name") final String name) {
     final boolean containsLogicalDelete = context.getMapperMethod().getAnnotation(BaseMapper.ContainsLogicalDelete.class) != null;
     final String tableName = context.getMapperType().getAnnotation(BaseMapper.Meta.class).tableName();
-    return new SQL(){{
+    return new SQL() {{
       SELECT("*");
       FROM(tableName);
       if (id != null) {
@@ -208,7 +208,7 @@ public class OurSqlBuilder {
       if (name != null) {
         WHERE("name like #{name} || '%'");
       }
-      if (!containsLogicalDelete){
+      if (!containsLogicalDelete) {
         WHERE("logical_delete = false");
       }
     }}.toString();
@@ -217,7 +217,7 @@ public class OurSqlBuilder {
   public String buildSelectByIdAndNameMultipleParamAndProviderContext(final Integer id, final String name, ProviderContext context) {
     final boolean containsLogicalDelete = context.getMapperMethod().getAnnotation(BaseMapper.ContainsLogicalDelete.class) != null;
     final String tableName = context.getMapperType().getAnnotation(BaseMapper.Meta.class).tableName();
-    return new SQL(){{
+    return new SQL() {{
       SELECT("*");
       FROM(tableName);
       if (id != null) {
@@ -226,7 +226,7 @@ public class OurSqlBuilder {
       if (name != null) {
         WHERE("name like #{param2} || '%'");
       }
-      if (!containsLogicalDelete){
+      if (!containsLogicalDelete) {
         WHERE("logical_delete = false");
       }
     }}.toString();
@@ -266,7 +266,7 @@ public class OurSqlBuilder {
     }
     if (columnMap.size() == 0) {
       throw new RuntimeException("There is no field in the class [" + entityClass.getCanonicalName()
-          + "] that specifies the @BaseMapper.Column annotation.");
+        + "] that specifies the @BaseMapper.Column annotation.");
     }
     return columnMap;
   }
